@@ -46,7 +46,7 @@ jobs:
       - name: Tag Docker image
         id: tag-image
         run: |
-          docker tag ${{ env.LATEST_TAG }} ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$IMAGE_NAME:latest
+          docker tag ${{ env.TEST_TAG }} ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$IMAGE_NAME:latest
 
 
 
@@ -70,4 +70,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ env.LATEST_TAG }}
+          tags: ${{ env.TEST_TAG }}
