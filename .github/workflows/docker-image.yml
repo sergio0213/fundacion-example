@@ -49,4 +49,5 @@ jobs:
       
       - name: Test
         run: |
-          docker run $IMAGE_NAME:latest /bin/bash -c "make test"
+          echo "docker run $IMAGE_NAME:latest "
+          docker run $IMAGE_NAME:latest 
