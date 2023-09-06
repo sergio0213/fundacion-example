@@ -6,6 +6,7 @@ env:
   team: "coe"
   language: "wordpres"
   cache-name: "cache-davi-coe-wordpres-mngr-template"
+  image-name: "fundacionbolivar"
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
@@ -37,4 +38,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
      - name: Build the Docker image
-       run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+       run: docker build . --file Dockerfile --tag ${image-name}:$(date +%s)
