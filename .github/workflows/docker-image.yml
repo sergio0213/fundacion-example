@@ -50,4 +50,4 @@ jobs:
       - name: Test
         run: |
           echo "docker run $IMAGE_NAME:latest "
-          docker run $IMAGE_NAME:latest 
+          docker run --rm $IMAGE_NAME:latest 
