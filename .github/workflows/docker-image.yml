@@ -6,7 +6,7 @@ env:
   team: "coe"
   language: "wordpres"
   cache-name: "cache-davi-coe-wordpres-mngr-template"
-  image-name: "fundacionbolivar"
+  IMAGE-NAME: "fundacionbolivar"
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
@@ -32,10 +32,5 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
-
-  build:
-    needs: setup
-    runs-on: ubuntu-latest
-    steps:
-     - name: Build the Docker image
-       run: docker build . --file Dockerfile --tag ${image-name}:$(date +%s)
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag $IMAGE-NAME:$(date +%s)
