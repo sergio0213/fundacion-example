@@ -7,6 +7,7 @@ env:
   language: "wordpres"
   cache-name: "cache-davi-coe-wordpres-mngr-template"
   IMAGE_NAME: "fundacionbolivar"
+  TEST_TAG: fundacionbolivar:test
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   AWS_REGION: ${{ secrets.AWS_REGION }}
@@ -47,7 +48,13 @@ jobs:
         run: |
           docker tag $IMAGE_NAME:latest ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.${{ secrets.AWS_REGION }}.amazonaws.com/$IMAGE_NAME:latest
       
+      - name: Build and export to Docker
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          load: true
+          tags: ${{ env.TEST_TAG }}
+
       - name: Test
         run: |
-          echo "docker run $IMAGE_NAME:latest "
-          docker run --rm $IMAGE_NAME:latest 
+          docker run --rm ${{ env.TEST_TAG }}   
