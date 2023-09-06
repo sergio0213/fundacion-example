@@ -37,9 +37,12 @@ jobs:
         run: |
           docker build -t $IMAGE_NAME .
 
-      - name: Build the Docker image
-      
-        run: |
-         echo "IMAGE-NAME variable : $IMAGE_NAME"
-         docker build . --file Dockerfile --tag $IMAGE_NAME:$(date +%s)
+#     - name: Build the Docker image
+#        run: |
+#        echo "IMAGE-NAME variable : $IMAGE_NAME"
+#        docker build . --file Dockerfile --tag $IMAGE_NAME:$(date +%s)
          
+      - name: Tag Docker image
+        id: tag-image
+        run: |
+          docker tag $IMAGE_NAME:latest $AWS_ACCOUNT_ID.dkr.ecr.$AWS_REGION.amazonaws.com/$IMAGE_NAME:latest
