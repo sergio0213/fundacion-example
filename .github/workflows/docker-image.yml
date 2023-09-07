@@ -43,10 +43,18 @@ jobs:
             echo $ECR_REGISTRY
             docker build -t $ECR_REGISTRY$GITHUB_SHA --no-cache=true .
             docker save $ECR_REGISTRY$GITHUB_SHA -o /tmp/$ECR_REGISTRY$GITHUB_SHA.tar
-
-        - name: Upload artifact
-          uses: actions/upload-artifact@v3
+            
+        - name: Build and export
+          uses: docker/build-push-action@v4
           with:
-            name: $ECR_REGISTRY$GITHUB_SHA
-            path: /tmp/$ECR_REGISTRY$GITHUB_SHA.tar
+              context: .
+              tags: myimage:latest
+              outputs: type=docker,dest=/tmp/myimage.tar
+        
+        -  name: Upload artifact
+           uses: actions/upload-artifact@v3
+           with:
+              name: myimage
+              path: /tmp/myimage.tar
+          
 
