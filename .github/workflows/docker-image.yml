@@ -76,6 +76,7 @@ jobs:
             AWS_SECRET_ACCESS_KEY:  ${{ secrets.AWS_SECRET_ACCESS_KEY }}
             AWS_DEFAULT_REGION: us-west-2
             ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+            ECR_REPOSITORY: wordpresstest
             IMAGE_TAG: fundacionbolivar
             
         - name: Upload Trivy scan results to GitHub Security tab
