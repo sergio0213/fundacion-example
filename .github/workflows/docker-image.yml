@@ -43,6 +43,9 @@ jobs:
             echo $ECR_REGISTRY
             docker build -t $ECR_REGISTRY$GITHUB_SHA --no-cache=true .
             docker save $ECR_REGISTRY$GITHUB_SHA -o /tmp/$ECR_REGISTRY$GITHUB_SHA.tar
+        
+        - name: Set up Docker Buildx
+          uses: docker/setup-buildx-action@v2
             
         - name: Build and export
           uses: docker/build-push-action@v4
