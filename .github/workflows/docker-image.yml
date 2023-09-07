@@ -71,7 +71,7 @@ jobs:
             ECR_REPOSITORY: wordpresstest
             IMAGE_TAG: fundacionbolivar
           run: |
-            echo " ${{env.ECR_REGISTRY}}/${{ECR_REPOSITORY}}:${{IMAGE_TAG}}"
+            echo " ${{env.ECR_REGISTRY}}/${{env.ECR_REPOSITORY}}:${{env.IMAGE_TAG}}"
             docker build -t $ECR_REGISTRY$GITHUB_SHA --no-cache=true .
             docker tag $ECR_REGISTRY$GITHUB_SHA $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
        
@@ -82,7 +82,7 @@ jobs:
             IMAGE_TAG: fundacionbolivar
           uses: aquasecurity/trivy-action@master
           with:
-            image-ref: '${{env.ECR_REGISTRY}}/${{ECR_REPOSITORY}}:${{IMAGE_TAG}}'
+            image-ref: '${{env.ECR_REGISTRY}}/${{env.ECR_REPOSITORY}}:${{env.IMAGE_TAG}}'
             format: 'sarif'
             output: 'trivy-results.sarif'
   
