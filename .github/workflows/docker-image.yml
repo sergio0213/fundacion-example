@@ -55,6 +55,27 @@ jobs:
             echo $ECR_REGISTRY
             docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
             
-        
+    Trivy_vulnerability:
+      name: Trivy
+      runs-on: ubuntu-20.04
+      steps:
+        - name: Checkout code
+          uses: actions/checkout@v3
+  
+        - name: Build an image from Dockerfile
+          run: |
+            docker build -t $ECR_REGISTRY$GITHUB_SHA --no-cache=true .
+  
+        - name: Run Trivy vulnerability scanner
+          uses: aquasecurity/trivy-action@master
+          with:
+            image-ref: '$ECR_REGISTRY$GITHUB_SHA'
+            format: 'sarif'
+            output: 'trivy-results.sarif'
+  
+        - name: Upload Trivy scan results to GitHub Security tab
+          uses: github/codeql-action/upload-sarif@v2
+          with:
+            sarif_file: 'trivy-results.sarif'        
 
           
