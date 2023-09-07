@@ -73,6 +73,7 @@ jobs:
           
           run: |
             echo $ECR_REGISTRY
+            context: .
             docker build -t $ECR_REGISTRY$GITHUB_SHA --no-cache=true .
             docker tag $ECR_REGISTRY$GITHUB_SHA $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
             docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
