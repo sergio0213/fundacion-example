@@ -40,8 +40,8 @@ jobs:
 
 #     - name: Build the Docker image
 #        run: |
-#        echo "IMAGE-NAME variable : $IMAGE_NAME"
-#        docker build . --file Dockerfile --tag $IMAGE_NAME:$(date +%s)
+#        echo "IMAGE-NAME variable : ${{ env.TEST_TAG }}"
+#        docker build . --file Dockerfile --tag ${{ env.TEST_TAG }}
          
       - name: Tag Docker image
         id: tag-image
