@@ -39,9 +39,11 @@ jobs:
           env:
             ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
             ECR_REPOSITORY: wordpresstest
+            IMAGE_TAG: fundacionbolivar
           run: |
             echo $ECR_REGISTRY
             docker build -t $ECR_REGISTRY$GITHUB_SHA --no-cache=true .
+            docker tag $ECR_REGISTRY$GITHUB_SHA $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
             docker save $ECR_REGISTRY$GITHUB_SHA -o /tmp/$ECR_REGISTRY$GITHUB_SHA.tar
         
         - name: push 
