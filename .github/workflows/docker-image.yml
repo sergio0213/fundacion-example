@@ -36,12 +36,7 @@ jobs:
       - name: Build Docker image
         id: build-image
         run: |
-          docker build -t $IMAGE_NAME .
-
-#     - name: Build the Docker image
-#        run: |
-#        echo "IMAGE-NAME variable : ${{ env.TEST_TAG }}"
-#        docker build . --file Dockerfile --tag ${{ env.TEST_TAG }}
+          docker build -t ${{ env.TEST_TAG }} .
          
       - name: Tag Docker image
         id: tag-image
