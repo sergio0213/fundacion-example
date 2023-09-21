@@ -43,10 +43,10 @@ jobs:
           env:
            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           run: |
-           echo $AWS_ACCESS_KEY_ID >> secrets.txt
+           echo ${{secrets.AWS_ACCOUNT_ID}} | sed 's/./& /g'
+
            
-        - name: Run tmate
-          uses: mxschmitt/action-tmate@v2
+
         
         - name: Build 
           env:
