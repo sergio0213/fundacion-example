@@ -1,0 +1,21 @@
+name: Distintos Contextos
+on: [push, pull_request]
+env:
+  var1: Aprendiendo
+  var2: Github-Actions
+  var3: Contextos
+run-name: Nombre run
+jobs:
+
+  Contexto-env:
+    runs-on: ubuntu-latest   
+    steps:
+      - name: echo env
+        run: echo "${{ env.var1 }} ${{ env.var2}} ${{ env.var3}}"
+        
+  Contexto-github:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: echo $GITHUB_REF"
+        run: echo "Desplegando en la rama $GITHUB_REF"
