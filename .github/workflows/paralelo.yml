@@ -7,8 +7,8 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        paso1: [1]
-        paso2: [2]
+        paso1: [1, 2]
+       
     steps:
       - name: Paso 1
         run: echo "Este es el paso ${{ matrix.paso1 }}"
