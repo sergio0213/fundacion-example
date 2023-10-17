@@ -1,0 +1,16 @@
+name: Ejecutar pasos en paralelo
+
+on: [push]
+
+jobs:
+  job:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        paso1: [1, 2]
+        paso2: [3, 4]
+    steps:
+      - name: Paso 1
+        run: echo "Este es el paso ${{ matrix.paso1 }}"
+      - name: Paso 2
+        run: echo "Este es el paso ${{ matrix.paso2 }}"
